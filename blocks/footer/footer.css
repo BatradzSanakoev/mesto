@@ -1,0 +1,16 @@
+@import url('./__copyright/footer__copyright.css');
+
+.footer {
+  margin-top: 4rem;
+  width: 74%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .footer {
+    margin-top: 3rem;
+  }
+}
+
