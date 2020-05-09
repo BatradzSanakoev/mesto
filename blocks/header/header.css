@@ -1,0 +1,14 @@
+.header {
+    min-width: 74%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-bottom: 1px solid #545454;
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+    .header {
+        min-width: 100%;
+    }
+}
