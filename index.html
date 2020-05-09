@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="root">
+  <div class="page">
+
+    <header class="header">
+      <img src="./images/logo.svg" alt="лого" class="logo">
+    </header>
+
+    <main class="content">
+
+      <section class="profile">
+        <div class="profile__edit-part">
+          <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
+          <div class="profile__text">
+            <div class="profile__edit-row">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button">
+                <img src="./images/edit.png" alt="редактировать" class="profile__edit-icon">
+              </button>
+            </div>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
+        </div>
+        <div class="profile__add-part">
+          <button class="profile__add-button"><img src="./images/add.png" alt="добавить"
+              class="profile__add-icon"></button>
+        </div>
+      </section>
+
+      <section class="elements">
+        <div class="element">
+          <img src="./images/1.jpg" alt="природа" class="element__photo">
+          <div class="element__bottom">
+            <p class="element__name">Карачаево-Черкесия</p>
+            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/2.jpg" alt="природа" class="element__photo">
+          <div class="element__bottom">
+            <p class="element__name">Гора Эльбрус</p>
+            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/3.jpg" alt="природа" class="element__photo">
+          <div class="element__bottom">
+            <p class="element__name">Домбай</p>
+            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/4.jpg" alt="природа" class="element__photo">
+          <div class="element__bottom">
+            <p class="element__name">Облако</p>
+            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/5.jpg" alt="природа" class="element__photo">
+          <div class="element__bottom">
+            <p class="element__name">Плато</p>
+            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="./images/6.jpg" alt="природа" class="element__photo">
+          <div class="element__bottom">
+            <p class="element__name">Водопад</p>
+            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>  
+
+    <section class="pop-up pop-up_opened">
+      <div class="pop-up__container">
+        <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть" class="pop-up__close-icon"></button>
+        <form class="pop-up__form">
+          <h2 class="pop-up__form-title">Редактировать профиль</h2>
+          <fieldset class="pop-up__form-input">
+            <input type="text" class="pop-up__input pop-up__input_name">
+            <input type="text" class="pop-up__input pop-up__input_desc">
+          </fieldset>
+          <fieldset class="pop-up__form-button">
+            <input type="submit" value="Сохранить" class="pop-up__button">
+          </fieldset>
+        </form>
+      </div>
+    </section>  
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
