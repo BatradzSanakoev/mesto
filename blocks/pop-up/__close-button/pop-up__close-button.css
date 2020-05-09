@@ -1,0 +1,21 @@
+.pop-up__close-button {
+  align-self: flex-end;
+  position: relative;
+  top: 18px;
+  right: 23px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+@media screen and (min-width: 1280px) {
+  .pop-up__close-button {
+    right: 5px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .pop-up__close-button {
+    top: 20px;
+    right: -25px;
+  }
+}
