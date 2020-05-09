@@ -1,0 +1,11 @@
+.profile__edit-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+    .profile__edit-row {
+        
+    }
+}

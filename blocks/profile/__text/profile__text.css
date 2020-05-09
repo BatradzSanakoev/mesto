@@ -1,0 +1,15 @@
+.profile__text {
+    max-width: 55%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+    .profile__text {
+        max-width: 85%;
+        margin: 1rem 0 0;
+    }
+}

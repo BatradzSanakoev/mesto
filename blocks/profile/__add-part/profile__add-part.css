@@ -1,0 +1,9 @@
+.profile__add-part {
+    min-width: 17%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+    .profile__add-part {
+        margin-top: 2rem;
+    }
+}

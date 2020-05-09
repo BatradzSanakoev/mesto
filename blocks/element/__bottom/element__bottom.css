@@ -1,0 +1,15 @@
+.element__bottom {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .element__bottom {
+    padding: 0 .5rem;
+    justify-content: space-between;
+  }
+}
+

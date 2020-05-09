@@ -1,0 +1,15 @@
+.profile__edit-part {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 53%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+    .profile__edit-part {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-width: 100%;
+    }
+}
