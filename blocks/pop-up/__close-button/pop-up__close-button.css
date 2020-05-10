@@ -2,20 +2,10 @@
   align-self: flex-end;
   position: relative;
   top: 18px;
-  right: 23px;
+  right: -45px;
   border: none;
+  padding: 0;
   background-color: rgba(0, 0, 0, 0);
 }
 
-@media screen and (min-width: 1280px) {
-  .pop-up__close-button {
-    right: 5px;
-  }
-}
 
-@media screen and (min-width: 320px) and (max-width: 424px) {
-  .pop-up__close-button {
-    top: 20px;
-    right: -25px;
-  }
-}

@@ -1,13 +1,23 @@
 .profile__description {
   margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.2;
+  font-size: 18px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .profile__description {
+    align-self: center;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 424px) {
   .profile__description {
-    font-size: .8rem;
-    line-height: 1.12;
+    align-self: center;
+    font-size: 14px;
+    line-height: 17px;
     text-align: center;
   }
 }

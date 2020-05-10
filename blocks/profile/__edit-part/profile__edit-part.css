@@ -1,15 +1,31 @@
 .profile__edit-part {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    min-width: 53%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 486px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 424px) {
-    .profile__edit-part {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-width: 100%;
-    }
+  .profile__edit-part {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .profile__edit-part {
+    max-width: 425px;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .profile__edit-part {
+    max-width: 282px;
+    flex-direction: column;
+    align-items: center;
+  }
 }
