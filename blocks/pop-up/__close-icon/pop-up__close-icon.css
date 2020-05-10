@@ -1,3 +1,5 @@
 .pop-up__close-icon:hover {
     opacity: .6;
+    cursor: pointer;
+    transition: opacity .7s ease;
 }

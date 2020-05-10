@@ -34,5 +34,4 @@ window.onload = function () {
   edit.addEventListener('click', editButton);
   close.addEventListener('click', closeButton);
   form.addEventListener('submit', formSubmitHandler);
-
 }
