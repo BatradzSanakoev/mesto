@@ -28,7 +28,7 @@ window.onload = function () {
 
     profName.textContent = popName.value;
     profDesc.textContent = popDesc.value;
-    pop.classList.toggle('pop-up_opened');
+    closeButton();
   }
 
   edit.addEventListener('click', editButton);
