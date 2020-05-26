@@ -1,0 +1,12 @@
+.element__del {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    z-index: 1;
+}
+
+.element__del:hover {
+    cursor: pointer;
+    opacity: .6;
+    transition: opacity .7s ease;
+}

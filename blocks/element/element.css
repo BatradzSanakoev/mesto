@@ -2,8 +2,10 @@
 @import url('./__bottom/element__bottom.css');
 @import url('./__name/element__name.css');
 @import url('./__like/element__like.css');
+@import url('./__del/element__del.css');
 
 .element {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;

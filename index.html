@@ -37,7 +37,7 @@
       </section>
 
       <section class="elements">
-        <div class="element">
+        <!-- <div class="element">
           <img src="./images/1.jpg" alt="природа" class="element__photo">
           <div class="element__bottom">
             <p class="element__name">Карачаево-Черкесия</p>
@@ -78,7 +78,7 @@
             <p class="element__name">Водопад</p>
             <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
           </div>
-        </div>
+        </div> -->
       </section>
 
     </main>
@@ -87,20 +87,46 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
+  </div>
+
+  <template id="image-popup">
+    <section class="image-popup pop-up_opened">
+      <div class="image-popup__container">
+        <button class="image-popup__close-button"><img src="./images/close.png" alt="закрыть"
+            class="image-popup__close-icon"></button>
+        <img class="image-popup__image">
+        <p class="image-popup__name"></p>
+      </div>
+    </section>
+  </template>
+
+  <template id="pop-up">
     <section class="pop-up pop-up_opened">
       <div class="pop-up__container">
-        <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть" class="pop-up__close-icon"></button>
+        <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть"
+            class="pop-up__close-icon"></button>
         <form class="pop-up__form">
           <h2 class="pop-up__form-title">Редактировать профиль</h2>
           <fieldset class="pop-up__form-input">
             <input type="text" class="pop-up__input pop-up__input_name">
             <input type="text" class="pop-up__input pop-up__input_desc">
             <button type="submit" class="pop-up__button">Сохранить</button>
+          </fieldset>
         </form>
       </div>
     </section>
+  </template>
 
-  </div>
+  <template id="element">
+    <div class="element">
+      <img src="./images/del.svg" alt="удалить" class="element__del">
+      <img class="element__photo">
+      <div class="element__bottom">
+        <p class="element__name"></p>
+        <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
+      </div>
+    </div>
+  </template>
 
   <script src="script.js"></script>
 </body>

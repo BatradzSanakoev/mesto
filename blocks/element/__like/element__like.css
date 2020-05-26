@@ -1,3 +1,5 @@
+@import url('./_liked/element__like_liked.css');
+
 .element__like {
   margin-right: 15px;
   background-color: #ffffff;

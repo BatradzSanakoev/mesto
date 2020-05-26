@@ -1,0 +1,13 @@
+@import url('./_name/add-up__input_name.css');
+@import url('./_link/add-up__input_link.css');
+
+.add-up__input {
+  border: none;
+  width: 100%;
+  height: 27px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
