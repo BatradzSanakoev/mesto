@@ -17,3 +17,8 @@
   cursor: pointer;
   transition: all .7s ease;
 }
+
+.pop-up__button:disabled {
+  background-color: rgba(0, 0, 0, .3);
+  cursor: pointer;
+}

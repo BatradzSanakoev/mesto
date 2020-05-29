@@ -199,6 +199,10 @@
     -webkit-appearance: button;
   }
   
+  button:focus {
+    outline: none;
+  }
+  
   /**
    * Remove the inner border and padding in Firefox.
    */

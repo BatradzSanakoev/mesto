@@ -9,6 +9,46 @@
 </head>
 
 <body>
+
+  <section class="pop-up edit-pop">
+    <div class="pop-up__container">
+      <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть"
+          class="pop-up__close-icon"></button>
+      <form class="pop-up__form">
+        <h2 class="pop-up__form-title">Редактировать профиль</h2>
+        <fieldset class="pop-up__form-input">
+          <input type="text" class="pop-up__input pop-up__input_name">
+          <input type="text" class="pop-up__input pop-up__input_desc">
+          <button type="submit" class="pop-up__button">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <section class="pop-up add-pop">
+    <div class="pop-up__container">
+      <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть"
+          class="pop-up__close-icon"></button>
+      <form class="pop-up__form">
+        <h2 class="pop-up__form-title">Новое место</h2>
+        <fieldset class="pop-up__form-input">
+          <input type="text" class="pop-up__input pop-up__input_name" placeholder = 'Название'>
+          <input type="text" class="pop-up__input pop-up__input_desc" placeholder = 'Ссылка на картинку'>
+          <button type="submit" class="pop-up__button">Создать</button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+    <section class="image-popup">
+      <div class="image-popup__container">
+        <button class="image-popup__close-button"><img src="./images/close.png" alt="закрыть"
+            class="image-popup__close-icon"></button>
+        <img class="image-popup__image" alt="здесь будет название добавленной фотографии">
+        <p class="image-popup__name"></p>
+      </div>
+    </section>
+
   <div class="page">
 
     <header class="header">
@@ -37,48 +77,6 @@
       </section>
 
       <section class="elements">
-        <!-- <div class="element">
-          <img src="./images/1.jpg" alt="природа" class="element__photo">
-          <div class="element__bottom">
-            <p class="element__name">Карачаево-Черкесия</p>
-            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="./images/2.jpg" alt="природа" class="element__photo">
-          <div class="element__bottom">
-            <p class="element__name">Гора Эльбрус</p>
-            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="./images/3.jpg" alt="природа" class="element__photo">
-          <div class="element__bottom">
-            <p class="element__name">Домбай</p>
-            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="./images/4.jpg" alt="природа" class="element__photo">
-          <div class="element__bottom">
-            <p class="element__name">Облако</p>
-            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="./images/5.jpg" alt="природа" class="element__photo">
-          <div class="element__bottom">
-            <p class="element__name">Плато</p>
-            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="./images/6.jpg" alt="природа" class="element__photo">
-          <div class="element__bottom">
-            <p class="element__name">Водопад</p>
-            <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
-          </div>
-        </div> -->
       </section>
 
     </main>
@@ -89,38 +87,10 @@
 
   </div>
 
-  <template id="image-popup">
-    <section class="image-popup">
-      <div class="image-popup__container">
-        <button class="image-popup__close-button"><img src="./images/close.png" alt="закрыть"
-            class="image-popup__close-icon"></button>
-        <img class="image-popup__image">
-        <p class="image-popup__name"></p>
-      </div>
-    </section>
-  </template>
-
-  <template id="pop-up">
-    <section class="pop-up">
-      <div class="pop-up__container">
-        <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть"
-            class="pop-up__close-icon"></button>
-        <form class="pop-up__form">
-          <h2 class="pop-up__form-title">Редактировать профиль</h2>
-          <fieldset class="pop-up__form-input">
-            <input type="text" class="pop-up__input pop-up__input_name">
-            <input type="text" class="pop-up__input pop-up__input_desc">
-            <button type="submit" class="pop-up__button">Сохранить</button>
-          </fieldset>
-        </form>
-      </div>
-    </section>
-  </template>
-
   <template id="element">
     <div class="element">
       <img src="./images/del.svg" alt="удалить" class="element__del">
-      <img class="element__photo">
+      <img class="element__photo" alt="здесь будет название добавленной фотографии">
       <div class="element__bottom">
         <p class="element__name"></p>
         <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button>
@@ -128,6 +98,7 @@
     </div>
   </template>
 
+  <script src="initialCards.js"></script>
   <script src="script.js"></script>
 </body>
 
