@@ -1,17 +1,19 @@
 .profile__edit-row {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 @media screen and (min-width: 425px) and (max-width: 767px) {
-    .profile__edit-row {
-      margin-top: 10px;
-      justify-content: center;
-    }
+  .profile__edit-row {
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 424px) {
   .profile__edit-row {
+    margin-top: 20px;
     justify-content: center;
   }
 }

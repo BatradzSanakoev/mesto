@@ -2,5 +2,5 @@
   max-width: 75vw;
   max-height: 75vh;
   border-radius: 22px;
-  object-fit: cover;
+  object-fit: contain;
 }

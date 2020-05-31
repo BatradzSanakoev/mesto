@@ -2,6 +2,7 @@
 @import url('./__bottom/element__bottom.css');
 @import url('./__name/element__name.css');
 @import url('./__like/element__like.css');
+@import url('./__icon/element__icon.css');
 @import url('./__del/element__del.css');
 
 .element {

@@ -1,17 +1,20 @@
+//Можете пожалуйста объяснить в чем проблема с адаптивкой ?  Я уже 2 раза переделывал и все равно толком не понял, где конкретно возникает ошибка
+
 const page = document.querySelector('.page'),
   content = document.querySelector('.content'),
-  edit = content.querySelector('.profile__edit-button'),
-  add = content.querySelector('.profile__add-button'),
+  editPopUp = document.querySelector('.edit-pop'),
+  addPopUp = document.querySelector('.add-pop'),
+  editButton = content.querySelector('.profile__edit-button'),
+  addButton = content.querySelector('.profile__add-button'),
   profName = content.querySelector('.profile__name'),
   profDesc = content.querySelector('.profile__description'),
   elements = content.querySelector('.elements');
 
 //Загружаю исходные карточки при загрузке страницы
-function loadCards() {
-  initialCards.forEach(item => {
-    createCard(item.link, item.name);
-  });
-}
+initialCards.forEach(item => {
+  const card = createCard(item.link, item.name);
+  addElementToDOM(card, elements);
+});
 
 //Функция создания карточки
 function createCard(link, name) {
@@ -19,31 +22,29 @@ function createCard(link, name) {
     cardContent = cardTemplate.cloneNode(true),
     cardPhoto = cardContent.querySelector('.element__photo'),
     cardName = cardContent.querySelector('.element__name'),
+    cardDelete = cardContent.querySelector('.element__del'),
+    cardLike = cardContent.querySelector('.element__icon'),
     card = cardContent.querySelector('.element');
 
   cardPhoto.src = link;
-  cardPhoto.alt = name;
+  cardPhoto.alt = name; //не понял замечание по поводу alt - при загрузке карточки в альт записывается название картинки, а что еще нужно?
   cardName.textContent = name;
 
-  return addElementToDOM(card);
+  cardDelete.addEventListener('click', deleteButton);
+  cardLike.addEventListener('click', likedIcon);
+  cardPhoto.addEventListener('click', openImagePopUp);
+
+  return card;
 }
 
 //Функция добавления карточки в DOM
-function addElementToDOM(card) {
-  const del = card.querySelector('.element__del'),
-    like = card.querySelector('.element__icon'),
-    photo = card.querySelector('.element__photo');
-
-  del.addEventListener('click', deleteButton);
-  like.addEventListener('click', likedIcon);
-  photo.addEventListener('click', openImagePopUp);
-  elements.prepend(card);
+function addElementToDOM(card, container) {
+  container.prepend(card);
 }
 
 //Функция удаления карточки
 function deleteButton(evt) {
   const delElement = evt.target.closest('.element');
-
   delElement.remove();
 }
 
@@ -78,13 +79,9 @@ function editSubmit(popUp) {
   const popName = popUp.querySelector('.pop-up__input_name'),
     popDesc = popUp.querySelector('.pop-up__input_desc');
 
-  //Хотел написать условие или функцию, чтобы при пустых полях кнопка блокировалась, а при заполнении разблокировалась, но ничего не вышло, не получается в реальном времени добиться такого эффекта
-  //Буду благодарен, если дадите подсказку оп данному вопросу  
-  if (popName.value === '' || popDesc.value === '') return 0;
-  else {
-    profName.textContent = popName.value;
-    profDesc.textContent = popDesc.value;
-  }
+  //Большое спасибо за REQUIRED!
+  profName.textContent = popName.value;
+  profDesc.textContent = popDesc.value;
 }
 
 //Функция реакции на нажатие кнопки "создать" на попапе добавления карточек
@@ -92,10 +89,8 @@ function addSubmit(popUp) {
   const addLink = popUp.querySelector('.pop-up__input_desc'),
     addName = popUp.querySelector('.pop-up__input_name');
 
-  if (addName.value === '' || addLink.value === '') return 0;
-  else {
-    createCard(addLink.value, addName.value);
-  }
+  const addCard = createCard(addLink.value, addName.value);
+  addElementToDOM(addCard, elements);
 }
 
 //Функция, реагирующая на нажатие кнопки на попапе и передающая требуемый попап функциям editSubmit/addSubmit
@@ -111,35 +106,30 @@ function formSubmitHandler(evt) {
   turnPopUp(popUp);
 }
 
-//Открытие попапа редактирования
-function callEditPopUp() {
-  const edit = document.querySelector('.edit-pop'),
-    editName = edit.querySelector('.pop-up__input_name'),
-    editDesc = edit.querySelector('.pop-up__input_desc'),
-    close = edit.querySelector('.pop-up__close-button'),
-    form = edit.querySelector('.pop-up__form');
-
-  editName.value = profName.textContent;
-  editDesc.value = profDesc.textContent;
-
-  turnPopUp(edit);
-  close.addEventListener('click', closeButton);
-  form.addEventListener('submit', formSubmitHandler);
+//Вызов попапа
+function callPopUp(evt) {
+  const evtTarget = evt.target;
+  return evtTarget.closest('.profile__edit-part') ? openPopUp(editPopUp) : openPopUp(addPopUp);
 }
 
-//Открытие попапа добавления карточек
-function callAddPopUp() {
-  const add = document.querySelector('.add-pop'),
-    addName = add.querySelector('.pop-up__input_name'),
-    addLink = add.querySelector('.pop-up__input_desc'),
-    close = add.querySelector('.pop-up__close-button'),
-    form = add.querySelector('.pop-up__form');
+//Открытие попапа(любого)
+function openPopUp(popUp) {
+  const popName = popUp.querySelector('.pop-up__input_name'),
+    popDesc = popUp.querySelector('.pop-up__input_desc'),
+    popClose = popUp.querySelector('.pop-up__close-button'),
+    popForm = popUp.querySelector('.pop-up__form');
 
-  turnPopUp(add);
-  form.addEventListener('submit', formSubmitHandler);
-  close.addEventListener('click', closeButton);
-  addName.value = '';
-  addLink.value = '';
+  if (popUp.classList.contains('edit-pop')) {
+    popName.value = profName.textContent;
+    popDesc.value = profDesc.textContent;
+  } else {
+    popName.value = '';
+    popDesc.value = '';
+  }
+
+  turnPopUp(popUp);
+  popClose.addEventListener('click', closeButton);
+  popForm.addEventListener('submit', formSubmitHandler);
 }
 
 //Функция открытия попапа изображения
@@ -158,6 +148,5 @@ function openImagePopUp(card) {
   imagePopUpClose.addEventListener('click', closeButton);
 }
 
-loadCards();
-edit.addEventListener('click', callEditPopUp);
-add.addEventListener('click', callAddPopUp);
+editButton.addEventListener('click', callPopUp);
+addButton.addEventListener('click', callPopUp);

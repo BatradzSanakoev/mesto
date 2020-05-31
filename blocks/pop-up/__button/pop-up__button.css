@@ -22,3 +22,10 @@
   background-color: rgba(0, 0, 0, .3);
   cursor: pointer;
 }
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .pop-up__button {
+    min-height: 85px;
+    font-size: calc((100vw - 26.5rem)/(48 - 26.5) * (2 - 1) + 1rem);
+  }
+}

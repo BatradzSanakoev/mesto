@@ -1,12 +1,24 @@
 .element__del {
-    position: absolute;
-    top: 18px;
-    right: 15px;
-    z-index: 1;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  z-index: 1;
 }
 
 .element__del:hover {
-    cursor: pointer;
-    opacity: .6;
-    transition: opacity .7s ease;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .7s ease;
+}
+
+@media screen and (min-width: 425px) and (max-width: 600px) {
+  .element__del {
+    min-width: 25px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .element__del {
+    min-width: 35px;
+  }
 }
