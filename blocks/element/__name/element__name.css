@@ -11,6 +11,6 @@
 
 @media screen and (min-width: 425px) and (max-width: 767px) {
   .element__name {
-    font-size: calc((100vw - 26.5rem)/(48 - 26.5) * (3 - 1.5) + 1.5rem);
+    font-size: calc((100vw - 26.5rem)/(48 - 26.5) * (2 - 1.5) + 1.5rem);
   }
 }

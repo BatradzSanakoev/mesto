@@ -1,5 +1,3 @@
-//Можете пожалуйста объяснить в чем проблема с адаптивкой ?  Я уже 2 раза переделывал и все равно толком не понял, где конкретно возникает ошибка
-
 const page = document.querySelector('.page'),
   content = document.querySelector('.content'),
   editPopUp = document.querySelector('.edit-pop'),
@@ -9,12 +7,6 @@ const page = document.querySelector('.page'),
   profName = content.querySelector('.profile__name'),
   profDesc = content.querySelector('.profile__description'),
   elements = content.querySelector('.elements');
-
-//Загружаю исходные карточки при загрузке страницы
-initialCards.forEach(item => {
-  const card = createCard(item.link, item.name);
-  addElementToDOM(card, elements);
-});
 
 //Функция создания карточки
 function createCard(link, name) {
@@ -27,7 +19,7 @@ function createCard(link, name) {
     card = cardContent.querySelector('.element');
 
   cardPhoto.src = link;
-  cardPhoto.alt = name; //не понял замечание по поводу alt - при загрузке карточки в альт записывается название картинки, а что еще нужно?
+  cardPhoto.alt = name;
   cardName.textContent = name;
 
   cardDelete.addEventListener('click', deleteButton);
@@ -106,12 +98,6 @@ function formSubmitHandler(evt) {
   turnPopUp(popUp);
 }
 
-//Вызов попапа
-function callPopUp(evt) {
-  const evtTarget = evt.target;
-  return evtTarget.closest('.profile__edit-part') ? openPopUp(editPopUp) : openPopUp(addPopUp);
-}
-
 //Открытие попапа(любого)
 function openPopUp(popUp) {
   const popName = popUp.querySelector('.pop-up__input_name'),
@@ -147,6 +133,18 @@ function openImagePopUp(card) {
 
   imagePopUpClose.addEventListener('click', closeButton);
 }
+
+//Вызов попапа
+function callPopUp(evt) {
+  const evtTarget = evt.target;
+  return evtTarget.closest('.profile__edit-part') ? openPopUp(editPopUp) : openPopUp(addPopUp);
+}
+
+//Загружаю исходные карточки при загрузке страницы
+initialCards.forEach(item => {
+  const card = createCard(item.link, item.name);
+  addElementToDOM(card, elements);
+});
 
 editButton.addEventListener('click', callPopUp);
 addButton.addEventListener('click', callPopUp);

@@ -3,3 +3,9 @@
     cursor: pointer;
     transition: opacity .7s ease;
 }
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+    .pop-up__close-icon {
+        width: 35px;
+    }
+}

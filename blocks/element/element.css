@@ -4,11 +4,16 @@
 @import url('./__like/element__like.css');
 @import url('./__icon/element__icon.css');
 @import url('./__del/element__del.css');
+@import url('./__container/element__container.css');
 
 .element {
   position: relative;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  min-height: 361px;
+}
+
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .element {
+    min-height: 261px;
+  }
 }

@@ -7,17 +7,27 @@
   white-space: nowrap;
 }
 
-@media screen and (min-width: 425px) and (max-width: 767px) {
+@media screen and (min-width: 601px) and (max-width: 767px) {
   .profile__description {
-    align-self: center;
-    margin-top: .5rem;
-    font-size: calc((100vw - 26.5rem)/(48 - 26.5) * (1.5 - 1) + 1rem);
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 600px) {
+  .profile__description {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 500px) {
+  .profile__description {
+    font-size: 16px;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 424px) {
   .profile__description {
     align-self: center;
-    font-size: calc((100vw - 20rem)/(26.5 - 20) * (1.2 - 1) + 1rem);
+    font-size: 14px;
   }
 }
