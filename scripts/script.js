@@ -19,7 +19,7 @@ function createCard(link, name) {
     card = cardContent.querySelector('.element');
 
   cardPhoto.src = link;
-  cardPhoto.alt = name;
+  cardPhoto.alt = `Картинка ${name} не загрузилась`;
   cardName.textContent = name;
 
   cardDelete.addEventListener('click', deleteButton);
