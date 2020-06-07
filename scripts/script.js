@@ -44,20 +44,46 @@ function deleteButton(evt) {
 function likedIcon(evt) {
   const evtTarget = evt.target,
     likedSrc = './images/liked.svg',
-    unlikeSrc = './images/like.svg';
+    unlikedSrc = './images/like.svg';
 
   if (!evtTarget.classList.contains('element__like_liked')) {
     evtTarget.classList.add('element__like_liked');
     evtTarget.src = likedSrc;
   } else {
     evtTarget.classList.remove('element__like_liked');
-    evtTarget.src = unlikeSrc;
+    evtTarget.src = unlikedSrc;
   }
 }
 
 //Функция открытия/закрытия попапа
 function turnPopUp(popUp) {
   popUp.classList.toggle('pops-visible');
+}
+
+//Функция закрывающая попап при нажатии на оверлей
+function overlayClosePopUp(evt) {
+  if (evt.target.matches('.pop-up')) turnPopUp(evt.target.closest('.pop-up'));
+  if (evt.target.matches('.image-popup')) turnPopUp(evt.target.closest('.image-popup'));
+}
+
+//Функция закрытия любоого попапа при нажатии Esc
+function escClose(evt) {
+  const popUp = document.querySelector('.pops-visible');
+
+  if (evt.key === 'Esc' || evt.key === 'Escape') {
+    turnPopUp(popUp);
+    removeEscListener();
+  }
+}
+
+//Установка слушателя для функции нажатия Esc
+function addEscListener() {
+  document.addEventListener('keydown', escClose);
+}
+
+//Удаление слушателя для функции нажатия Esc
+function removeEscListener() {
+  document.removeEventListener('keydown', escClose);
 }
 
 //Функция, передающая turnPopUp требуемый попап для закрытия
@@ -71,7 +97,6 @@ function editSubmit(popUp) {
   const popName = popUp.querySelector('.pop-up__input_name'),
     popDesc = popUp.querySelector('.pop-up__input_desc');
 
-  //Большое спасибо за REQUIRED!
   profName.textContent = popName.value;
   profDesc.textContent = popDesc.value;
 }
@@ -109,10 +134,11 @@ function openPopUp(popUp) {
     popName.value = profName.textContent;
     popDesc.value = profDesc.textContent;
   } else {
-    popName.value = '';
-    popDesc.value = '';
+    popForm.reset();
   }
 
+  addEscListener();
+  popUp.addEventListener('click', overlayClosePopUp);
   turnPopUp(popUp);
   popClose.addEventListener('click', closeButton);
   popForm.addEventListener('submit', formSubmitHandler);
@@ -126,12 +152,14 @@ function openImagePopUp(card) {
     name = imagePopUp.querySelector('.image-popup__name'),
     element = card.target.closest('.element');
 
+  imagePopUp.addEventListener('click', overlayClosePopUp);
   turnPopUp(imagePopUp);
   image.src = element.querySelector('.element__photo').src;
   image.alt = element.querySelector('.element__photo').alt;
   name.textContent = element.querySelector('.element__name').textContent;
 
   imagePopUpClose.addEventListener('click', closeButton);
+  addEscListener();
 }
 
 //Вызов попапа

@@ -6,6 +6,7 @@
 @import url('./__form-input/pop-up__form-input.css');
 @import url('./__input/pop-up__input.css');
 @import url('./__button/pop-up__button.css');
+@import url('./__form-error/pop-up__form-error.css');
 
 .pop-up {
   font-family: Inter, 'Open Sans', sans-serif;
