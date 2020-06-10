@@ -1,17 +1,23 @@
-const page = document.querySelector('.page'),
-  content = document.querySelector('.content'),
+const content = document.querySelector('.content'),
   editPopUp = document.querySelector('.edit-pop'),
-  addPopUp = document.querySelector('.add-pop'),
+  editName = editPopUp.querySelector('.pop-up__input_edit-name'),
+  editDesc = editPopUp.querySelector('.pop-up__input_edit-desc'),
   editButton = content.querySelector('.profile__edit-button'),
+  addPopUp = document.querySelector('.add-pop'),
+  addName = addPopUp.querySelector('.pop-up__input_add-name'),
+  addUrl = addPopUp.querySelector('.pop-up__input_add-url'),
   addButton = content.querySelector('.profile__add-button'),
+  imagePopUp = document.querySelector('.image-popup'),
+  imageName = imagePopUp.querySelector('.image-popup__name'),
+  image = imagePopUp.querySelector('.image-popup__image'),
   profName = content.querySelector('.profile__name'),
   profDesc = content.querySelector('.profile__description'),
-  elements = content.querySelector('.elements');
+  elements = content.querySelector('.elements'),
+  cardTemplate = document.querySelector('#element').content;
 
 //Функция создания карточки
 function createCard(link, name) {
-  const cardTemplate = document.querySelector('#element').content,
-    cardContent = cardTemplate.cloneNode(true),
+  const cardContent = cardTemplate.cloneNode(true),
     cardPhoto = cardContent.querySelector('.element__photo'),
     cardName = cardContent.querySelector('.element__name'),
     cardDelete = cardContent.querySelector('.element__del'),
@@ -42,8 +48,8 @@ function deleteButton(evt) {
 
 //Функция изменения иконки лайка при нажатии
 function likedIcon(evt) {
-  const evtTarget = evt.target,
-    likedSrc = './images/liked.svg',
+  const evtTarget = evt.target;
+  likedSrc = './images/liked.svg',
     unlikedSrc = './images/like.svg';
 
   if (!evtTarget.classList.contains('element__like_liked')) {
@@ -58,55 +64,76 @@ function likedIcon(evt) {
 //Функция открытия/закрытия попапа
 function turnPopUp(popUp) {
   popUp.classList.toggle('pops-visible');
+  if (!popUp.classList.contains('pops-visible')) {
+    removeCloseButtonListener();
+    removeEscCloseListener();
+    removeOverlayCloseListener();
+  }
 }
 
-//Функция закрывающая попап при нажатии на оверлей
+//Функция закрывающая попап при нажатии на оверлей, установка и удаление слушателя для нее ///////////////////////////////////////////////
 function overlayClosePopUp(evt) {
-  if (evt.target.matches('.pop-up')) turnPopUp(evt.target.closest('.pop-up'));
-  if (evt.target.matches('.image-popup')) turnPopUp(evt.target.closest('.image-popup'));
+  if (evt.target.matches('.pop-up')) {
+    turnPopUp(evt.target.closest('.pop-up'));
+    removeOverlayCloseListener();
+  }
 }
 
-//Функция закрытия любоого попапа при нажатии Esc
+function addOverlayCloseListener() {
+  document.addEventListener('click', overlayClosePopUp);
+}
+
+function removeOverlayCloseListener() {
+  document.removeEventListener('click', overlayClosePopUp);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Функция закрытия любоого попапа при нажатии Esc, установка и удаление слушателя для нее ///////////////////////////////////////////////
 function escClose(evt) {
   const popUp = document.querySelector('.pops-visible');
 
   if (evt.key === 'Esc' || evt.key === 'Escape') {
     turnPopUp(popUp);
-    removeEscListener();
+    removeEscCloseListener();
   }
 }
 
-//Установка слушателя для функции нажатия Esc
-function addEscListener() {
+function addEscCloseListener() {
   document.addEventListener('keydown', escClose);
 }
 
-//Удаление слушателя для функции нажатия Esc
-function removeEscListener() {
+function removeEscCloseListener() {
   document.removeEventListener('keydown', escClose);
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Функция, передающая turnPopUp требуемый попап для закрытия
+//Функция, передающая turnPopUp требуемый попап для закрытия, установка и удаление слушателя для нее /////////////////////////////////////////////// 
 function closeButton(evt) {
-  if (evt.target.closest('.pop-up')) turnPopUp(evt.target.closest('.pop-up'));
-  if (evt.target.closest('.image-popup')) turnPopUp(evt.target.closest('.image-popup'));
+  if (evt.target.matches('.pop-up__close-icon')) {
+    turnPopUp(evt.target.closest('.pop-up'));
+    removeCloseButtonListener();
+  }
 }
 
-//Функция реакции на нажатие кнопки "сохранить" на попапе редактирования
-function editSubmit(popUp) {
-  const popName = popUp.querySelector('.pop-up__input_name'),
-    popDesc = popUp.querySelector('.pop-up__input_desc');
+function addCloseButtonListener() {
+  document.addEventListener('click', closeButton);
+}
 
-  profName.textContent = popName.value;
-  profDesc.textContent = popDesc.value;
+function removeCloseButtonListener() {
+  document.removeEventListener('click', closeButton);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Функция реакции на нажатие кнопки "сохранить" на попапе редактирования
+function editSubmit() {
+  profName.textContent = editName.value;
+  profDesc.textContent = editDesc.value;
+  editName.closest('.pop-up__form').reset();
 }
 
 //Функция реакции на нажатие кнопки "создать" на попапе добавления карточек
-function addSubmit(popUp) {
-  const addLink = popUp.querySelector('.pop-up__input_desc'),
-    addName = popUp.querySelector('.pop-up__input_name');
-
-  const addCard = createCard(addLink.value, addName.value);
+function addSubmit() {
+  const addCard = createCard(addUrl.value, addName.value);
   addElementToDOM(addCard, elements);
 }
 
@@ -117,55 +144,45 @@ function formSubmitHandler(evt) {
   const evtButton = evt.target.querySelector('.pop-up__button'),
     popUp = evtButton.closest('.pop-up');
 
-  if (popUp.classList.contains('edit-pop')) editSubmit(popUp);
-  else addSubmit(popUp);
-
+  popUp.classList.contains('edit-pop') ? editSubmit(): addSubmit();
   turnPopUp(popUp);
 }
 
 //Открытие попапа(любого)
 function openPopUp(popUp) {
-  const popName = popUp.querySelector('.pop-up__input_name'),
-    popDesc = popUp.querySelector('.pop-up__input_desc'),
-    popClose = popUp.querySelector('.pop-up__close-button'),
-    popForm = popUp.querySelector('.pop-up__form');
+  const popForm = popUp.querySelector('.pop-up__form');
 
   if (popUp.classList.contains('edit-pop')) {
-    popName.value = profName.textContent;
-    popDesc.value = profDesc.textContent;
+    editName.value = profName.textContent;
+    editDesc.value = profDesc.textContent;
   } else {
     popForm.reset();
   }
-
-  addEscListener();
-  popUp.addEventListener('click', overlayClosePopUp);
+  enableValidation(validObj);
   turnPopUp(popUp);
-  popClose.addEventListener('click', closeButton);
+  addCloseButtonListener();
+  addEscCloseListener();
+  addOverlayCloseListener();
   popForm.addEventListener('submit', formSubmitHandler);
 }
 
 //Функция открытия попапа изображения
 function openImagePopUp(card) {
-  const imagePopUp = document.querySelector('.image-popup'),
-    imagePopUpClose = imagePopUp.querySelector('.image-popup__close-button'),
-    image = imagePopUp.querySelector('.image-popup__image'),
-    name = imagePopUp.querySelector('.image-popup__name'),
-    element = card.target.closest('.element');
+  const element = card.target.closest('.element');
 
-  imagePopUp.addEventListener('click', overlayClosePopUp);
-  turnPopUp(imagePopUp);
   image.src = element.querySelector('.element__photo').src;
   image.alt = element.querySelector('.element__photo').alt;
-  name.textContent = element.querySelector('.element__name').textContent;
+  imageName.textContent = element.querySelector('.element__name').textContent;
 
-  imagePopUpClose.addEventListener('click', closeButton);
-  addEscListener();
+  turnPopUp(imagePopUp);
+  addCloseButtonListener();
+  addEscCloseListener();
+  addOverlayCloseListener();
 }
 
 //Вызов попапа
 function callPopUp(evt) {
-  const evtTarget = evt.target;
-  return evtTarget.closest('.profile__edit-part') ? openPopUp(editPopUp) : openPopUp(addPopUp);
+  return evt.target.closest('.profile__edit-part') ? openPopUp(editPopUp) : openPopUp(addPopUp);
 }
 
 //Загружаю исходные карточки при загрузке страницы

@@ -17,10 +17,10 @@
       <form class="pop-up__form" novalidate>
         <h2 class="pop-up__form-title">Редактировать профиль</h2>
         <fieldset class="pop-up__form-input">
-          <input type="text" class="pop-up__input pop-up__input_name" id="name-input" required minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁё\s\-]{1,}">
-          <span class="pop-up__form-error" id="name-input-error"></span>
-          <input type="text" class="pop-up__input pop-up__input_desc" id="desc-input" required minlength="2" maxlength="200">
-          <span class="pop-up__form-error" id="desc-input-error"></span>
+          <input type="text" class="pop-up__input pop-up__input_edit-name" id="edit-name-input" required minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁё\s\-]{1,}">
+          <span class="pop-up__form-error" id="edit-name-input-error"></span>
+          <input type="text" class="pop-up__input pop-up__input_edit-desc" id="edit-desc-input" required minlength="2" maxlength="200">
+          <span class="pop-up__form-error" id="edit-desc-input-error"></span>
           <button type="submit" class="pop-up__button">Сохранить</button>
         </fieldset>
       </form>
@@ -34,20 +34,20 @@
       <form class="pop-up__form" novalidate>
         <h2 class="pop-up__form-title">Новое место</h2>
         <fieldset class="pop-up__form-input">
-          <input type="text" class="pop-up__input pop-up__input_name" id="name-input" placeholder='Название' required minlength="1" maxlength="30">
-          <span class="pop-up__form-error" id="name-input-error"></span>
-          <input type="url" class="pop-up__input pop-up__input_desc" id="desc-input" placeholder='Ссылка на картинку' required>
-          <span class="pop-up__form-error" id="desc-input-error"></span>
+          <input type="text" class="pop-up__input pop-up__input_add-name" id="add-name-input" placeholder='Название' required minlength="1" maxlength="30">
+          <span class="pop-up__form-error" id="add-name-input-error"></span>
+          <input type="url" class="pop-up__input pop-up__input_add-url" id="add-url-input" placeholder='Ссылка на картинку' required>
+          <span class="pop-up__form-error" id="add-url-input-error"></span>
           <button type="submit" class="pop-up__button">Создать</button>
         </fieldset>
       </form>
     </div>
   </section>
 
-  <section class="image-popup">
+  <section class="pop-up image-popup">
     <div class="image-popup__container">
       <button class="image-popup__close-button"><img src="./images/close.png" alt="закрыть"
-          class="image-popup__close-icon"></button>
+          class="image-popup__close-icon pop-up__close-icon"></button>
       <img class="image-popup__image" alt="здесь будет название добавленной фотографии">
       <p class="image-popup__name"></p>
     </div>

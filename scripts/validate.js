@@ -27,6 +27,7 @@ const enableValidation = validObj => {
         checkInputValidity(formElement, inputElement, inputElement.validationMessage, validObj.inputErrorClass, validObj.errorClass); //Проверяем валидность введенных данных
         toggleButtonState(inputList, submitButton, validObj.inactiveButtonClass); //Блокировка/разблокировка кнопки
       });
+      hideInputError(formElement, inputElement, validObj.inputErrorClass, validObj.errorClass);
     });
   });
 };
@@ -57,8 +58,14 @@ const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) 
 
 //Функция блокировки/разблокировки кнопки отправки формы
 const toggleButtonState = (inputList, buttonElement, buttonError) => {
-  if (hasInvalidInput(inputList)) buttonElement.classList.add(buttonError);
-  else buttonElement.classList.remove(buttonError);
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(buttonError);
+    buttonElement.setAttribute('disabled', true);
+  }
+  else {
+    buttonElement.classList.remove(buttonError);
+    buttonElement.removeAttribute('disabled', true);
+  }
 };
 
 //Функция проверки валидности введенных данных для функции блокировки кнопки
@@ -67,5 +74,3 @@ const hasInvalidInput = inputList => {
     return !inputElement.validity.valid;
   });
 };
-
-enableValidation(validObj);
