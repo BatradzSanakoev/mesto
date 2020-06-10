@@ -48,8 +48,8 @@ function deleteButton(evt) {
 
 //Функция изменения иконки лайка при нажатии
 function likedIcon(evt) {
-  const evtTarget = evt.target;
-  likedSrc = './images/liked.svg',
+  const evtTarget = evt.target,
+    likedSrc = './images/liked.svg',
     unlikedSrc = './images/like.svg';
 
   if (!evtTarget.classList.contains('element__like_liked')) {
@@ -61,20 +61,10 @@ function likedIcon(evt) {
   }
 }
 
-//Функция открытия/закрытия попапа
-function turnPopUp(popUp) {
-  popUp.classList.toggle('pops-visible');
-  if (!popUp.classList.contains('pops-visible')) {
-    removeCloseButtonListener();
-    removeEscCloseListener();
-    removeOverlayCloseListener();
-  }
-}
-
 //Функция закрывающая попап при нажатии на оверлей, установка и удаление слушателя для нее ///////////////////////////////////////////////
 function overlayClosePopUp(evt) {
   if (evt.target.matches('.pop-up')) {
-    turnPopUp(evt.target.closest('.pop-up'));
+    closePopUp(evt.target.closest('.pop-up'));
     removeOverlayCloseListener();
   }
 }
@@ -93,7 +83,7 @@ function escClose(evt) {
   const popUp = document.querySelector('.pops-visible');
 
   if (evt.key === 'Esc' || evt.key === 'Escape') {
-    turnPopUp(popUp);
+    closePopUp(popUp);
     removeEscCloseListener();
   }
 }
@@ -107,10 +97,10 @@ function removeEscCloseListener() {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Функция, передающая turnPopUp требуемый попап для закрытия, установка и удаление слушателя для нее /////////////////////////////////////////////// 
+//Функция, передающая turnPopUp требуемый попап для закрытия, установка и удаление слушателя для нее ///////////////////////////////////////////////
 function closeButton(evt) {
   if (evt.target.matches('.pop-up__close-icon')) {
-    turnPopUp(evt.target.closest('.pop-up'));
+    closePopUp(evt.target.closest('.pop-up'));
     removeCloseButtonListener();
   }
 }
@@ -144,25 +134,42 @@ function formSubmitHandler(evt) {
   const evtButton = evt.target.querySelector('.pop-up__button'),
     popUp = evtButton.closest('.pop-up');
 
-  popUp.classList.contains('edit-pop') ? editSubmit(): addSubmit();
-  turnPopUp(popUp);
+  popUp.classList.contains('edit-pop') ? editSubmit() : addSubmit();
+  closePopUp(popUp);
 }
 
-//Открытие попапа(любого)
+//Функция открытия попапа
 function openPopUp(popUp) {
-  const popForm = popUp.querySelector('.pop-up__form');
-
-  if (popUp.classList.contains('edit-pop')) {
-    editName.value = profName.textContent;
-    editDesc.value = profDesc.textContent;
-  } else {
-    popForm.reset();
-  }
-  enableValidation(validObj);
-  turnPopUp(popUp);
+  popUp.classList.add('pops-visible');
   addCloseButtonListener();
   addEscCloseListener();
   addOverlayCloseListener();
+}
+
+//Функция закрытия попапа
+function closePopUp(popUp) {
+  popUp.classList.remove('pops-visible');
+  removeCloseButtonListener();
+  removeEscCloseListener();
+  removeOverlayCloseListener();
+}
+
+//Функция открытияПопапаРедактирования
+function openProfileEdit() {
+  const popForm = editPopUp.querySelector('.pop-up__form');
+  enableValidation(validObj);//вызываю валидацию в ф-иях редактирования и добавления, чтобы избежать ситуации
+  editName.value = profName.textContent;//когда после добавления карточки или изменении профиля при последующем запуске попапа кнопка не заблокирована
+  editDesc.value = profDesc.textContent;
+  openPopUp(editPopUp);
+  popForm.addEventListener('submit', formSubmitHandler);
+}
+
+//Функция открытияПопапаДобавленияКарточки
+function openProfileAdd() {
+  const popForm = addPopUp.querySelector('.pop-up__form');
+  popForm.reset();
+  openPopUp(addPopUp);
+  enableValidation(validObj);
   popForm.addEventListener('submit', formSubmitHandler);
 }
 
@@ -174,15 +181,7 @@ function openImagePopUp(card) {
   image.alt = element.querySelector('.element__photo').alt;
   imageName.textContent = element.querySelector('.element__name').textContent;
 
-  turnPopUp(imagePopUp);
-  addCloseButtonListener();
-  addEscCloseListener();
-  addOverlayCloseListener();
-}
-
-//Вызов попапа
-function callPopUp(evt) {
-  return evt.target.closest('.profile__edit-part') ? openPopUp(editPopUp) : openPopUp(addPopUp);
+  openPopUp(imagePopUp);
 }
 
 //Загружаю исходные карточки при загрузке страницы
@@ -191,5 +190,5 @@ initialCards.forEach(item => {
   addElementToDOM(card, elements);
 });
 
-editButton.addEventListener('click', callPopUp);
-addButton.addEventListener('click', callPopUp);
+editButton.addEventListener('click', openProfileEdit);
+addButton.addEventListener('click', openProfileAdd);
