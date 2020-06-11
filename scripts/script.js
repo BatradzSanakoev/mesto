@@ -140,7 +140,6 @@ function formSubmitHandler(evt) {
 
 //Функция открытия попапа
 function openPopUp(popUp) {
-  openPopUpValidate(popUp);
   popUp.classList.add('pops-visible');
   addCloseButtonListener();
   addEscCloseListener();
@@ -157,7 +156,8 @@ function closePopUp(popUp) {
 
 //Функция открытияПопапаРедактирования
 function openProfileEdit() {
-  const popForm = editPopUp.querySelector('.pop-up__form');  
+  const popForm = editPopUp.querySelector('.pop-up__form'); 
+  openPopUpValidate(editPopUp); 
   openPopUp(editPopUp);
   editName.value = profName.textContent;
   editDesc.value = profDesc.textContent;
@@ -168,17 +168,20 @@ function openProfileEdit() {
 function openProfileAdd() {
   const popForm = addPopUp.querySelector('.pop-up__form');
   popForm.reset();
+  openPopUpValidate(addPopUp);
   openPopUp(addPopUp);
   popForm.addEventListener('submit', formSubmitHandler);
 }
 
 //Функция открытия попапа изображения
 function openImagePopUp(card) {
-  const element = card.target.closest('.element');
+  const element = card.target.closest('.element'),
+    elementPhoto = element.querySelector('.element__photo'),
+    elementName = element.querySelector('.element__name');
 
-  image.src = element.querySelector('.element__photo').src;
-  image.alt = element.querySelector('.element__photo').alt;
-  imageName.textContent = element.querySelector('.element__name').textContent;
+  image.src = elementPhoto.src;
+  image.alt = elementPhoto.alt;
+  imageName.textContent = elementName.textContent;
 
   openPopUp(imagePopUp);
 }
