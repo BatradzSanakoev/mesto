@@ -27,14 +27,14 @@ const enableValidation = validObj => {
         checkInputValidity(formElement, inputElement, inputElement.validationMessage, validObj.inputErrorClass, validObj.errorClass); //Проверяем валидность введенных данных
         toggleButtonState(inputList, submitButton, validObj.inactiveButtonClass); //Блокировка/разблокировка кнопки
       });
-      hideInputError(formElement, inputElement, validObj.inputErrorClass, validObj.errorClass);
+      hideInputError(formElement, inputElement, validObj.inputErrorClass, validObj.errorClass); //скрываем тексты ошибок при запуске валидации
     });
   });
 };
 
 //Функция проверки полей ввода формы
 const checkInputValidity = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
-  if(!inputElement.validity.valid) showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass);
+  if (!inputElement.validity.valid) showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass);
   else hideInputError(formElement, inputElement, inputErrorClass, errorClass);
 };
 
@@ -61,8 +61,7 @@ const toggleButtonState = (inputList, buttonElement, buttonError) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(buttonError);
     buttonElement.setAttribute('disabled', true);
-  }
-  else {
+  } else {
     buttonElement.classList.remove(buttonError);
     buttonElement.removeAttribute('disabled', true);
   }
@@ -72,5 +71,13 @@ const toggleButtonState = (inputList, buttonElement, buttonError) => {
 const hasInvalidInput = inputList => {
   return inputList.some(inputElement => {
     return !inputElement.validity.valid;
+  });
+};
+
+const openPopUpValidate = popUp => {
+  const inputList = Array.from(popUp.querySelector(validObj.formSelector).querySelectorAll(validObj.inputSelector));
+  inputList.forEach(inputElement => {
+    hideInputError(popUp.querySelector(validObj.formSelector), inputElement, validObj.inputErrorClass, validObj.errorClass);
+    toggleButtonState(inputList, popUp.querySelector(validObj.submitButtonSelector), validObj.inactiveButtonClass);
   });
 };

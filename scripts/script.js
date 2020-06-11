@@ -140,6 +140,7 @@ function formSubmitHandler(evt) {
 
 //Функция открытия попапа
 function openPopUp(popUp) {
+  openPopUpValidate(popUp);
   popUp.classList.add('pops-visible');
   addCloseButtonListener();
   addEscCloseListener();
@@ -151,16 +152,15 @@ function closePopUp(popUp) {
   popUp.classList.remove('pops-visible');
   removeCloseButtonListener();
   removeEscCloseListener();
-  removeOverlayCloseListener();
+  removeOverlayCloseListener();  
 }
 
 //Функция открытияПопапаРедактирования
 function openProfileEdit() {
-  const popForm = editPopUp.querySelector('.pop-up__form');
-  enableValidation(validObj);//вызываю валидацию в ф-иях редактирования и добавления, чтобы избежать ситуации
-  editName.value = profName.textContent;//когда после добавления карточки или изменении профиля при последующем запуске попапа кнопка не заблокирована
-  editDesc.value = profDesc.textContent;
+  const popForm = editPopUp.querySelector('.pop-up__form');  
   openPopUp(editPopUp);
+  editName.value = profName.textContent;
+  editDesc.value = profDesc.textContent;
   popForm.addEventListener('submit', formSubmitHandler);
 }
 
@@ -169,7 +169,6 @@ function openProfileAdd() {
   const popForm = addPopUp.querySelector('.pop-up__form');
   popForm.reset();
   openPopUp(addPopUp);
-  enableValidation(validObj);
   popForm.addEventListener('submit', formSubmitHandler);
 }
 
@@ -192,3 +191,4 @@ initialCards.forEach(item => {
 
 editButton.addEventListener('click', openProfileEdit);
 addButton.addEventListener('click', openProfileAdd);
+enableValidation(validObj);
