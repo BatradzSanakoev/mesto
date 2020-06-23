@@ -14,7 +14,7 @@
     <div class="pop-up__container">
       <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть"
           class="pop-up__close-icon"></button>
-      <form class="pop-up__form" novalidate>
+      <form class="pop-up__form pop-up__form_edit" novalidate>
         <h2 class="pop-up__form-title">Редактировать профиль</h2>
         <fieldset class="pop-up__form-input">
           <input type="text" class="pop-up__input pop-up__input_edit-name" id="edit-name-input" required minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁё\s\-]{1,}">
@@ -31,7 +31,7 @@
     <div class="pop-up__container">
       <button class="pop-up__close-button"><img src="./images/close.png" alt="закрыть"
           class="pop-up__close-icon"></button>
-      <form class="pop-up__form" novalidate>
+      <form class="pop-up__form pop-up__form_add" novalidate>
         <h2 class="pop-up__form-title">Новое место</h2>
         <fieldset class="pop-up__form-input">
           <input type="text" class="pop-up__input pop-up__input_add-name" id="add-name-input" placeholder='Название' required minlength="1" maxlength="30">
@@ -105,9 +105,9 @@
   </template>
 
   
-  <script src="./scripts/validate.js"></script>
-  <script src="./scripts/initialCards.js"></script>
-  <script src="./scripts/script.js"></script>
+  <!-- <script type="module" src="./scripts/FormValidator.js"></script>
+  <script type="module" src="./scripts/Card.js"></script> -->
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
