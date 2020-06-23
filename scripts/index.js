@@ -22,7 +22,9 @@ const content = document.querySelector('.content'),
   profName = content.querySelector('.profile__name'),
   profDesc = content.querySelector('.profile__description'),
   elements = content.querySelector('.elements'),
-  cardTemplate = document.querySelector('#element');
+  cardTemplate = document.querySelector('#element'),
+  editValidation = new FormValidator(valObj, editForm),
+  addValidation = new FormValidator(valObj, addForm);
 
 //Функция добавления карточки в DOM
 function addElementToDOM(card, container) {
@@ -125,20 +127,22 @@ function closePopUp(popUp) {
 //Функция открытияПопапаРедактирования
 function openProfileEdit() {
   const popForm = editPopUp.querySelector('.pop-up__form');
-  const validation = new FormValidator(valObj, editForm);
-  validation.enableValidation();
+
+  editValidation.enableValidation();
   openPopUp(editPopUp);
+
   editName.value = profName.textContent;
   editDesc.value = profDesc.textContent;
+  
   popForm.addEventListener('submit', formSubmitHandler);
 }
 
 //Функция открытияПопапаДобавленияКарточки
 function openProfileAdd() {
   const popForm = addPopUp.querySelector('.pop-up__form');
+
   popForm.reset();
-  const validation = new FormValidator(valObj, addForm);
-  validation.enableValidation();
+  addValidation.enableValidation();
   openPopUp(addPopUp);
   popForm.addEventListener('submit', formSubmitHandler);
 }
@@ -162,5 +166,7 @@ cards.forEach(item => {
   addElementToDOM(card, elements);
 });
 
+// editForm.addEventListener('click', formSubmitHandler);
+// addForm.addEventListener('click', formSubmitHandler);
 editButton.addEventListener('click', openProfileEdit);
 addButton.addEventListener('click', openProfileAdd);
