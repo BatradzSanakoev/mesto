@@ -1,6 +1,6 @@
 import {
   openImagePopUp as _openImPopup
-} from './index.js';
+} from './utils.js';
 
 export default class Card {
   constructor(link, name, elementTemplate) {
@@ -25,40 +25,31 @@ export default class Card {
     cardPhoto.alt = `Картинка ${this._name} не загрузилась`;
     cardName.textContent = this._name;
 
-    this._setEventListeners(card);
+    this._element = card;
+    this._setEventListeners(this._element);
 
-    return card;
+    return this._element;
   }
 
   //Функция удаления карточки
-  _deleteButton(evt) {
-    const delElement = evt.target.closest('.element');
-    delElement.remove();
+  _deleteButton() {
+    this._element.remove();
   }
 
   //Функция изменения иконки лайка при нажатии
-  _likedIcon(evt) {
-    const evtTarget = evt.target,
-      likedSrc = './images/liked.svg',
-      unlikedSrc = './images/like.svg';
-
-    if (!evtTarget.classList.contains('element__like_liked')) {
-      evtTarget.classList.add('element__like_liked');
-      evtTarget.src = likedSrc;
-    } else {
-      evtTarget.classList.remove('element__like_liked');
-      evtTarget.src = unlikedSrc;
-    }
+  _likedIcon() {
+    console.log
+    this._element.querySelector('.element__like').classList.toggle('element__like_liked');
   }
 
   _setEventListeners(card) {
     const cardDelete = card.querySelector(`.${this._elementTemplate.id}__del`),
-      cardLike = card.querySelector(`.${this._elementTemplate.id}__icon`),
+      cardLike = card.querySelector(`.${this._elementTemplate.id}__like`),
       cardPhoto = card.querySelector(`.${this._elementTemplate.id}__photo`);
 
-    cardDelete.addEventListener('click', this._deleteButton);
+    cardDelete.addEventListener('click', () => this._deleteButton());
 
-    cardLike.addEventListener('click', this._likedIcon);
+    cardLike.addEventListener('click', () => this._likedIcon());
 
     cardPhoto.addEventListener('click', _openImPopup);
   }

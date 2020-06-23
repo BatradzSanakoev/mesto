@@ -28,44 +28,44 @@ export default class FormValidator {
   }
 
   //Функция проверки полей ввода формы
-  _checkInputValidity = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
+  _checkInputValidity(formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
     if (!inputElement.validity.valid) this._showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass);
     else this._hideInputError(formElement, inputElement, inputErrorClass, errorClass);
-  };
+  }
 
   //Функция показа текста ошибки
-  _showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
+  _showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(errorClass);
-  };
+  }
 
   //Функция скрытия текста ошибки
-  _hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
+  _hideInputError(formElement, inputElement, inputErrorClass, errorClass) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
     inputElement.classList.remove(inputErrorClass);
     errorElement.classList.remove(errorClass);
     errorElement.textContent = '';
-  };
+  }
 
   //Функция блокировки/разблокировки кнопки отправки формы
-  _toggleButtonState = (inputList, buttonElement, buttonError) => {
+  _toggleButtonState(inputList, buttonElement, buttonError) {
     if (this._hasInvalidInput(inputList)) {
       buttonElement.classList.add(buttonError);
       buttonElement.setAttribute('disabled', true);
     } else {
       buttonElement.classList.remove(buttonError);
-      buttonElement.removeAttribute('disabled', true);
+      buttonElement.removeAttribute('disabled');
     }
-  };
+  }
 
   //Функция проверки валидности введенных данных для функции блокировки кнопки
-  _hasInvalidInput = inputList => {
+  _hasInvalidInput(inputList) {
     return inputList.some(inputElement => {
       return !inputElement.validity.valid;
     });
-  };
+  }
 }

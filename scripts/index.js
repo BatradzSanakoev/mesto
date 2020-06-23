@@ -31,22 +31,12 @@ function addElementToDOM(card, container) {
   container.prepend(card);
 }
 
-//Функция закрывающая попап при нажатии на оверлей, установка и удаление слушателя для нее ///////////////////////////////////////////////
+//Функция закрывающая попап при нажатии на оверлей
 function overlayClosePopUp(evt) {
   if (evt.target.matches('.pop-up')) {
     closePopUp(evt.target.closest('.pop-up'));
-    removeOverlayCloseListener();
   }
 }
-
-function addOverlayCloseListener() {
-  document.addEventListener('click', overlayClosePopUp);
-}
-
-function removeOverlayCloseListener() {
-  document.removeEventListener('click', overlayClosePopUp);
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Функция закрытия любоого попапа при нажатии Esc, установка и удаление слушателя для нее ///////////////////////////////////////////////
 function escClose(evt) {
@@ -67,22 +57,12 @@ function removeEscCloseListener() {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Функция, передающая turnPopUp требуемый попап для закрытия, установка и удаление слушателя для нее ///////////////////////////////////////////////
+//Функция закрытия попапа по клику на крестик
 function closeButton(evt) {
   if (evt.target.matches('.pop-up__close-icon')) {
     closePopUp(evt.target.closest('.pop-up'));
-    removeCloseButtonListener();
   }
 }
-
-function addCloseButtonListener() {
-  document.addEventListener('click', closeButton);
-}
-
-function removeCloseButtonListener() {
-  document.removeEventListener('click', closeButton);
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Функция реакции на нажатие кнопки "сохранить" на попапе редактирования
 function editSubmit() {
@@ -111,30 +91,27 @@ function formSubmitHandler(evt) {
 //Функция открытия попапа
 function openPopUp(popUp) {
   popUp.classList.add('pops-visible');
-  addCloseButtonListener();
   addEscCloseListener();
-  addOverlayCloseListener();
+  popUp.querySelector('.pop-up__close-button').addEventListener('click', closeButton);
+  popUp.addEventListener('click', overlayClosePopUp);
 }
 
 //Функция закрытия попапа
 function closePopUp(popUp) {
   popUp.classList.remove('pops-visible');
-  removeCloseButtonListener();
   removeEscCloseListener();
-  removeOverlayCloseListener();
 }
 
 //Функция открытияПопапаРедактирования
 function openProfileEdit() {
   const popForm = editPopUp.querySelector('.pop-up__form');
 
+  popForm.reset();
   editValidation.enableValidation();
   openPopUp(editPopUp);
 
   editName.value = profName.textContent;
   editDesc.value = profDesc.textContent;
-  
-  popForm.addEventListener('submit', formSubmitHandler);
 }
 
 //Функция открытияПопапаДобавленияКарточки
@@ -144,20 +121,6 @@ function openProfileAdd() {
   popForm.reset();
   addValidation.enableValidation();
   openPopUp(addPopUp);
-  popForm.addEventListener('submit', formSubmitHandler);
-}
-
-//Функция открытия попапа изображения
-export function openImagePopUp(evt) {
-  const element = evt.target.closest('.element'),
-    elementPhoto = element.querySelector('.element__photo'),
-    elementName = element.querySelector('.element__name');
-
-  image.src = elementPhoto.src;
-  image.alt = elementPhoto.alt;
-  imageName.textContent = elementName.textContent;
-
-  openPopUp(imagePopUp);
 }
 
 //Загружаю исходные карточки при загрузке страницы
@@ -166,7 +129,9 @@ cards.forEach(item => {
   addElementToDOM(card, elements);
 });
 
-// editForm.addEventListener('click', formSubmitHandler);
-// addForm.addEventListener('click', formSubmitHandler);
+editForm.addEventListener('submit', formSubmitHandler);
+addForm.addEventListener('submit', formSubmitHandler);
 editButton.addEventListener('click', openProfileEdit);
 addButton.addEventListener('click', openProfileAdd);
+
+export {openPopUp, imageName, image, imagePopUp};

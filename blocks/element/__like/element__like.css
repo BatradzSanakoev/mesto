@@ -3,6 +3,7 @@
 .element__like {
   margin-right: 15px;
   background-color: #ffffff;
+  background-image: url(../../../images/like.svg);
   min-width: 21px;
   min-height: 19px;
   border: none;
