@@ -3,6 +3,7 @@
   top: 18px;
   right: 15px;
   z-index: 1;
+  transition: .7s ease;
 }
 
 .element__del:hover {

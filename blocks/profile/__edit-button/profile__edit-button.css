@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: .7s ease;
 }
 
 .profile__edit-button:hover {

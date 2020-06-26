@@ -7,6 +7,7 @@
   align-items: center;
   background-color: #000000;
   border: 2px solid #ffffff;
+  transition: .7s ease;
 }
 
 .profile__add-button:hover {
