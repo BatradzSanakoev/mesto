@@ -99,6 +99,7 @@ function openPopUp(popUp) {
 //Функция закрытия попапа
 function closePopUp(popUp) {
   popUp.classList.remove('pops-visible');
+  popUp.classList.contains('edit-pop') ? editValidation.resetValidation() : addValidation.resetValidation();
   removeEscCloseListener();
 }
 
@@ -106,8 +107,6 @@ function closePopUp(popUp) {
 function openProfileEdit() {
   const popForm = editPopUp.querySelector('.pop-up__form');
 
-  popForm.reset();
-  editValidation.enableValidation();
   openPopUp(editPopUp);
 
   editName.value = profName.textContent;
@@ -118,8 +117,6 @@ function openProfileEdit() {
 function openProfileAdd() {
   const popForm = addPopUp.querySelector('.pop-up__form');
 
-  popForm.reset();
-  addValidation.enableValidation();
   openPopUp(addPopUp);
 }
 
@@ -133,5 +130,6 @@ editForm.addEventListener('submit', formSubmitHandler);
 addForm.addEventListener('submit', formSubmitHandler);
 editButton.addEventListener('click', openProfileEdit);
 addButton.addEventListener('click', openProfileAdd);
-
+editValidation.enableValidation();
+addValidation.enableValidation();
 export {openPopUp, imageName, image, imagePopUp};

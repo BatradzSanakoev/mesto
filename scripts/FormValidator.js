@@ -27,6 +27,18 @@ export default class FormValidator {
     });
   }
 
+  resetValidation() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)), //Получаем массив всех инпутов
+      submitButton = this._formElement.querySelector(this._submitButtonSelector);
+
+    this._formElement.reset();
+    this._toggleButtonState(inputList, submitButton, this._inactiveButtonClass);
+
+    inputList.forEach(inputElement => {
+      this._hideInputError(this._formElement, inputElement, this._inputErrorClass, this._errorClass);
+    })
+  }
+
   //Функция проверки полей ввода формы
   _checkInputValidity(formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
     if (!inputElement.validity.valid) this._showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass);
