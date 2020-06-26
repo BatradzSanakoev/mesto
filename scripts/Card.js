@@ -34,11 +34,11 @@ export default class Card {
   //Функция удаления карточки
   _deleteButton() {
     this._element.remove();
+    this._element = null;
   }
 
   //Функция изменения иконки лайка при нажатии
   _likedIcon() {
-    console.log
     this._element.querySelector('.element__like').classList.toggle('element__like_liked');
   }
 
