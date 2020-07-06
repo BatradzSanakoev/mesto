@@ -1,12 +1,9 @@
-import {
-  openImagePopUp as _openImPopup
-} from './utils.js';
-
 export default class Card {
-  constructor(link, name, elementTemplate) {
+  constructor(link, name, elementTemplate, handleCardClick) {
     this._link = link;
     this._name = name;
     this._elementTemplate = elementTemplate;
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardTemplate() {
@@ -51,6 +48,6 @@ export default class Card {
 
     cardLike.addEventListener('click', () => this._likedIcon());
 
-    cardPhoto.addEventListener('click', _openImPopup);
+    cardPhoto.addEventListener('click', this._handleCardClick);
   }
 }

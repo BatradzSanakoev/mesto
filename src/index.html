@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <lxink rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body>
@@ -17,9 +17,9 @@
       <form class="pop-up__form pop-up__form_edit" novalidate>
         <h2 class="pop-up__form-title">Редактировать профиль</h2>
         <fieldset class="pop-up__form-input">
-          <input type="text" class="pop-up__input pop-up__input_edit-name" id="edit-name-input" required minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁё\s\-]{1,}">
+          <input type="text" name="name" class="pop-up__input pop-up__input_edit-name" id="edit-name-input" required minlength="2" maxlength="40" pattern="[A-Za-zА-Яа-яЁё\s\-]{1,}">
           <span class="pop-up__form-error" id="edit-name-input-error"></span>
-          <input type="text" class="pop-up__input pop-up__input_edit-desc" id="edit-desc-input" required minlength="2" maxlength="200">
+          <input type="text" name="description" class="pop-up__input pop-up__input_edit-desc" id="edit-desc-input" required minlength="2" maxlength="200">
           <span class="pop-up__form-error" id="edit-desc-input-error"></span>
           <button type="submit" class="pop-up__button">Сохранить</button>
         </fieldset>
@@ -34,9 +34,9 @@
       <form class="pop-up__form pop-up__form_add" novalidate>
         <h2 class="pop-up__form-title">Новое место</h2>
         <fieldset class="pop-up__form-input">
-          <input type="text" class="pop-up__input pop-up__input_add-name" id="add-name-input" placeholder='Название' required minlength="1" maxlength="30">
+          <input type="text" name="name" class="pop-up__input pop-up__input_add-name" id="add-name-input" placeholder='Название' required minlength="1" maxlength="30">
           <span class="pop-up__form-error" id="add-name-input-error"></span>
-          <input type="url" class="pop-up__input pop-up__input_add-url" id="add-url-input" placeholder='Ссылка на картинку' required>
+          <input type="url" name="url" class="pop-up__input pop-up__input_add-url" id="add-url-input" placeholder='Ссылка на картинку' required>
           <span class="pop-up__form-error" id="add-url-input-error"></span>
           <button type="submit" class="pop-up__button">Создать</button>
         </fieldset>
@@ -99,13 +99,12 @@
       </div>
       <div class="element__bottom">
         <p class="element__name"></p>
-        <!-- <button class="element__like"><img src="./images/like.svg" alt="лайк" class="element__icon"></button> -->
         <button class="element__like"></button>
       </div>
     </div>
   </template>
 
-  <script type="module" src="./scripts/index.js"></script>
+  <!-- <script type="module" src="./scripts/index.js"></script> -->
 </body>
 
 </html>
