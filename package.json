@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "mesto project (ya.praktikum)",
-  "main": "./scripts/index.js",
+  "main": "./pages/index.js",
   "scripts": {
     "build": "rm -rf dist && webpack",
     "dev": "webpack-dev-server --open --watch"
