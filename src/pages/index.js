@@ -44,14 +44,14 @@ const cardsRender = new Section({
 cardsRender.renderItems();
 
 //создание экземпляра класса UserInfo
-const editInfo = new UserInfo({
+const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   descSelector: '.profile__description'
 });
 
 //функция editFormSubmitCallback для передачи в экземпляр класса попапа
 const editFormSubmitCallback = (item) => {
-  editInfo.setUserInfo({
+  userInfo.setUserInfo({
     newName: item.name,
     newDesc: item.description
   })
@@ -63,10 +63,10 @@ editPop.setEventListeners();
 
 //открытие попапа редактирования
 editButton.addEventListener('click', () => {
-  const getEditInfo = editInfo.getUserInfo();
+  const editInfo = userInfo.getUserInfo();
   editValidation.resetValidation();
-  editName.value = getEditInfo.name;
-  editDesc.value = getEditInfo.description;
+  editName.value = editInfo.name;
+  editDesc.value = editInfo.description;
   editPop.open();
 });
 
