@@ -9,6 +9,8 @@
 @import url('./__add-button/profile__add-button.css');
 @import url('./__add-icon/profile__add-icon.css');
 @import url('./__edit-row/profile__edit-row.css');
+@import url('./__avatar-column/profile__avatar-column.css');
+@import url('./__avatar-overlay/profile__avatar-overlay.css');
 
 .profile {
   width: 100%;

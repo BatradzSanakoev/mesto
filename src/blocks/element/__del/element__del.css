@@ -1,3 +1,5 @@
+@import url('./_hidden/element__del_hidden.css');
+
 .element__del {
   position: absolute;
   top: 18px;

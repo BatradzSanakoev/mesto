@@ -6,8 +6,9 @@ export default class PopupWithImage extends Popup {
   }
 
   open(link, name) {
-    this._popupSelector.querySelector('.image-popup__image').src = link; 
-    this._popupSelector.querySelector('.image-popup__image').alt = name; 
+    this._popupSelector.querySelector('.image-popup__image').src = link;
+    this._popupSelector.querySelector('.image-popup__image').alt = `Картинка ${name} не загрузилась`;
+    this._popupSelector.querySelector('.image-popup__name').textContent = name;
     super.open();
   }
 }

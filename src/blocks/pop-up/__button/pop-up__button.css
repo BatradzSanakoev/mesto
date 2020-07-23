@@ -1,4 +1,5 @@
 @import url('./_inactive/pop-up__button_inactive.css');
+@import url('./_delete-confirm/pop-up__button_delete-confirm.css');
 
 .pop-up__button {
   margin-top: 48px;

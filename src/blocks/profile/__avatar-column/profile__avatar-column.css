@@ -1,0 +1,36 @@
+.profile__avatar-column {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 30px 0 0;
+}
+
+@media screen and (min-width: 601px) and (max-width: 767px) {
+  .profile__avatar-column {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 600px) {
+  .profile__avatar-column {
+    width: 190px;
+    height: 190px;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 500px) {
+  .profile__avatar-column {
+    width: 190px;
+    height: 190px;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .profile__avatar-column {
+    width: 150px;
+    height: 150px;
+    margin: 0;
+  }
+}

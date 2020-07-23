@@ -1,10 +1,11 @@
 @import url('./_liked/element__like_liked.css');
 
 .element__like {
-  margin-right: 15px;
   background-color: #ffffff;
   background-image: url(../../../images/like.svg);
-  min-width: 21px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
   min-height: 19px;
   border: none;
   padding: 0;
