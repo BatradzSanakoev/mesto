@@ -27,7 +27,7 @@ export default class FormValidator {
     });
   }
 
-  resetValidation(num) {
+  resetValidation() {
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)), //Получаем массив всех инпутов
       submitButton = this._formElement.querySelector(this._submitButtonSelector);
 
@@ -36,7 +36,7 @@ export default class FormValidator {
 
     inputList.forEach(inputElement => {
       this._hideInputError(this._formElement, inputElement, this._inputErrorClass, this._errorClass);
-    })
+    });
   }
 
   //Функция проверки полей ввода формы

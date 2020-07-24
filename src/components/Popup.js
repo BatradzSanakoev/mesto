@@ -15,7 +15,12 @@ export default class Popup {
   _handleEscClose(evt) {
     if (evt.key === 'Esc' || evt.key === 'Escape') {
       this.close(document.querySelector('.pops-visible'));
+      document.removeEventListener('keydown', this._handleEscClose);
     }
+  }
+
+  escListener() {
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   setEventListeners() {
@@ -25,8 +30,6 @@ export default class Popup {
 
     document.addEventListener('click', evt => { //закрытие попапа при клике на оверлей
       if (evt.target.matches('.pop-up')) this.close();
-    })
-
-    document.addEventListener('keydown', this._handleEscClose);
+    });
   }
 }

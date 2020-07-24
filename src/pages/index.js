@@ -1,7 +1,9 @@
 import '../pages/index.css';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import {valObj} from '../utils/constants.js';
+import {
+  valObj
+} from '../utils/constants.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithDeleteConfirm from '../components/PopupWithDeleteConfirm.js';
@@ -23,10 +25,10 @@ const content = document.querySelector('.content'),
   delPopUp = document.querySelector('.delete-pop'),
   avatarPopUp = document.querySelector('.avatar-pop'),
   avatarForm = avatarPopUp.querySelector('.pop-up__form_avatar'),
-  profile_name = content.querySelector('.profile__name'),
-  profile_description = content.querySelector('.profile__description'),
-  profile_avatar = content.querySelector('.profile__avatar'),
-  profile_avatar_edit = content.querySelector('.profile__avatar-overlay'),
+  profileName = content.querySelector('.profile__name'),
+  profileDescription = content.querySelector('.profile__description'),
+  profileAvatar = content.querySelector('.profile__avatar'),
+  profileAvatarEdit = content.querySelector('.profile__avatar-overlay'),
   cardTemplate = document.querySelector('#element');
 
 //настройки запроса
@@ -49,9 +51,9 @@ const api = new Api(apiOptions);
 //загружаем данные профиля
 api.loadUserInfo()
   .then(result => {
-    profile_name.textContent = result.name;
-    profile_description.textContent = result.about;
-    profile_avatar.src = result.avatar;
+    profileName.textContent = result.name;
+    profileDescription.textContent = result.about;
+    profileAvatar.src = result.avatar;
   });
 
 // создаем экземпляр класса попапа аватара, реализуем в колбеке смену аватара
@@ -60,21 +62,22 @@ const avatarPop = new PopupWithAvatarLink(avatarPopUp, (evt) => {
   const buttonValue = avatarPop._popupForm.querySelector('.pop-up__button');
   buttonValue.textContent = 'Обновление...';
   const url = avatarPop._popupForm.querySelector('.pop-up__input').value;
-  avaValidation.resetValidation();
   api.editUserAvatar({
       url: url
     })
     .then(result => {
-      profile_avatar.src = result.avatar;
+      profileAvatar.src = result.avatar;
       buttonValue.textContent = 'Изменить';
     })
-    .finally(() => avatarPop.close())
+    .finally(() => avatarPop.close());
 });
 avatarPop.setEventListeners();
 avatarPop.setSubmit();
 
-profile_avatar_edit.addEventListener('click', () => {
+profileAvatarEdit.addEventListener('click', () => {
+  avaValidation.resetValidation();
   avatarPop.open();
+  avatarPop.escListener();
 });
 
 //создаем экземпляр класса попапа изображения
@@ -97,26 +100,37 @@ const delPop = new PopupWithDeleteConfirm(delPopUp, (evt, card) => {
 delPop.setSubmit();
 delPop.setEventListeners();
 
+const callbackForCardApiLoad = item => {
+  const card = new Card(item, cardTemplate, () => {
+      popupImage.open(item.link, item.name);
+      popupImage.escListener();
+    },
+    () => {
+      delPop.open(card);
+      delPop.escListener();
+    },
+    evt => {
+      const likeButton = evt.target;
+      const likesCount = likeButton.closest('.element__likes').querySelector('.element__like-count');
+      likeButton.classList.toggle('element__like_liked');
+      if (likeButton.classList.contains('element__like_liked')) {
+        item.likes.push(item.owner);
+        api.likeCard(item._id)
+          .then(() => likesCount.textContent = item.likes.length);
+      } else {
+        item.likes.pop(item.owner);
+        api.unlikeCard(item._id)
+          .then(() => likesCount.textContent = item.likes.length);
+      }
+    });
+    return card;
+};
+
 //загружаем карточки с сервера
 api.loadCards()
   .then(result => {
-    const renderer = item => { //далее в экземпляр класса Карточки передаем колбэки открытия картинки, удаления карточки и лайка
-      const card = new Card(item, cardTemplate, () => popupImage.open(item.link, item.name), () => delPop.open(card),
-        evt => {
-          const likeButton = evt.target;
-          const likesCount = likeButton.closest('.element__likes').querySelector('.element__like-count');
-          likeButton.classList.toggle('element__like_liked');
-          if (likeButton.classList.contains('element__like_liked')) {
-            item.likes.push(item.owner);
-            api.likeCard(item._id);
-            likesCount.textContent = item.likes.length;
-          } else {
-            item.likes.pop(item.owner);
-            api.unlikeCard(item._id);
-            likesCount.textContent = item.likes.length;
-          }
-        });
-
+    const renderer = item => {
+      const card = callbackForCardApiLoad(item);
       const cardElement = card.createCard();
       if (item.owner._id !== 'c58d0e152de19d7deeb93b37') cardElement.querySelector('.element__del').classList.add('element__del_hidden');
       cardsRender.addItem(cardElement);
@@ -162,6 +176,7 @@ editButton.addEventListener('click', () => {
   editName.value = editInfo.name;
   editDesc.value = editInfo.description;
   editPop.open();
+  editPop.escListener();
 });
 
 //создание экземпляра класса Section
@@ -173,25 +188,11 @@ const addCardsRender = new Section({
 const addFormSubmitCallback = item => {
   api.addCard(item)
     .then(result => {
-      const card = new Card(result, cardTemplate, () => popupImage.open(result.link, result.name), () => delPop.open(card),
-        (evt) => {
-          const likeButton = evt.target;
-          const likesCount = likeButton.closest('.element__likes').querySelector('.element__like-count');
-          likeButton.classList.toggle('element__like_liked');
-          if (likeButton.classList.contains('element__like_liked')) {
-            item.likes.push(item.owner);
-            api.likeCard(item._id);
-            likesCount.textContent = item.likes.length;
-          } else {
-            item.likes.pop(item.owner);
-            api.unlikeCard(item._id);
-            likesCount.textContent = item.likes.length;
-          }
-        });
-
+      const card = callbackForCardApiLoad(result);
       const cardElement = card.createCard();
       addCardsRender.addItem(cardElement);
-    });
+    })
+    .finally(() => addPop.close());
 }
 
 // //создание экземпляра класса PopupWithForm
@@ -202,6 +203,7 @@ addPop.setEventListeners();
 addButton.addEventListener('click', () => {
   addValidation.resetValidation();
   addPop.open();
+  addPop.escListener();
 });
 
 //включение валидации
